@@ -1,5 +1,6 @@
 package backend.move;
 
+
 import backend.Grid;
 
 public class TwoWrappedMove extends Move {

@@ -1,11 +1,12 @@
 package backend.cell;
 
+
 import backend.Grid;
-import backend.element.Candy;
 import backend.element.CandyColor;
 import backend.element.Element;
+import backend.element.Candy;
 
-public class CandyGeneratorCell extends backend.cell.GeneratorCell {
+public class CandyGeneratorCell extends GeneratorCell {
 
 	public CandyGeneratorCell(Grid grid) {
 		super(grid);

@@ -1,11 +1,10 @@
 package backend;
 
 import backend.cell.Cell;
-
 import backend.element.Element;
 
 
-public class CandyGame implements backend.GameListener {
+public class CandyGame implements GameListener {
 
 	private Grid grid;
 	private GameState state;
@@ -29,7 +28,7 @@ public class CandyGame implements backend.GameListener {
 		return grid.getCell(i, j);
 	}
 	
-	public void addGameListener(backend.GameListener listener) {
+	public void addGameListener(GameListener listener) {
 		grid.addListener(listener);
 	}
 	

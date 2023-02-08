@@ -1,11 +1,12 @@
 package backend;
 
 import backend.cell.Cell;
-import backend.element.Candy;
 import backend.element.CandyColor;
 import backend.element.Element;
 import backend.move.Move;
 import backend.move.MoveMaker;
+import backend.element.Candy;
+
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -19,25 +20,25 @@ public abstract class Grid {
 
 	private Cell[][] g = new Cell[SIZE][SIZE];
 	private final Map<Cell, Point> gMap = new HashMap<>();
-	private backend.GameState state;
-	private final List<backend.GameListener> listeners = new ArrayList<>();
+	private GameState state;
+	private final List<GameListener> listeners = new ArrayList<>();
 	private MoveMaker moveMaker;
-	private backend.FigureDetector figureDetector;
+	private FigureDetector figureDetector;
 	
-	protected abstract backend.GameState newState();
+	protected abstract GameState newState();
 	protected abstract void fillCells();
 	
 	protected Cell[][] g() {
 		return g;
 	}
 	
-	public backend.GameState state(){
+	public GameState state(){
 		return state;
 	}
 	
 	public void initialize() {
 		moveMaker = new MoveMaker(this);
-		figureDetector = new backend.FigureDetector(this);
+		figureDetector = new FigureDetector(this);
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				g[i][j] = new Cell(this);
@@ -131,20 +132,20 @@ public abstract class Grid {
 		return this.state;
 	}
 	
-	public void addListener(backend.GameListener listener) {
+	public void addListener(GameListener listener) {
 		listeners.add(listener);
 	}
 	
 	public void wasUpdated(){
 		if (listeners.size() > 0) {
-			for (backend.GameListener gl: listeners) {
+			for (GameListener gl: listeners) {
 				gl.gridUpdated();
 			}
 		}
 	}
 	
 	public void cellExplosion(Element e) {
-		for (backend.GameListener gl: listeners) {
+		for (GameListener gl: listeners) {
 			gl.cellExplosion(e);
 		}
 	}

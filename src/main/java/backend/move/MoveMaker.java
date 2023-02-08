@@ -1,10 +1,11 @@
 package backend.move;
 
+
 import backend.Grid;
-import backend.element.Candy;
 import backend.element.HorizontalStripedCandy;
-import backend.element.VerticalStripedCandy;
 import backend.element.WrappedCandy;
+import backend.element.Candy;
+import backend.element.VerticalStripedCandy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,28 +26,17 @@ public class MoveMaker {
 	*       + HorizontalStripedCandy	=	CandyMove
 	* 		+ VerticalStripedCandy		=	CandyMove
 	* 		+ WrappedCandy				=	CandyMove
-	* 		+ Bomb						=	BombMove
-	* 		+ Fruit						=	CandyMove
 	*
 	* (Horizontal | Vertical)StripedCandy + Candy				   =	CandyMove
 	* 						 			  + HorizontalStripedCandy =    TwoStripedMove
 	*						 			  + VerticalStripedCandy   =	TwoStripedMove
 	*						 			  + WrappedCandy		   =	WrappedStripedMove
-	* 						 			  + Bomb				   = 	BombStrippedMove
-	* 						 		      + Fruit				   =	CandyMove
 	*
 	* WrappedCandy + Candy 					 = 		CandyMove
 	* 			   + HorizontalStripedCandy  =		WrappedStripedMove
 	* 			   + VerticalStripedCandy    =		WrappedStripedMove
 	* 			   + WrappedCandy  			 =		TwoWrappedMove
-	* 			   + Fruit					 =		CandyMove
 	*
-	* Bomb + Candy					 =		BombMove
-	* 	   + HorizontalStripedCandy  =		BombStrippedMove
-	* 	   + VerticalStripedCandy    =		BombStrippedMove
-	* 	   + WrappedCandy			 =		BombWrappedMove
-	* 	   + Bomb					 =		TwoBombMove
-	* 	   + Fruit					 =		FruitMove
 	*/
 	private void initMap(){
 		map = new HashMap<>();
@@ -56,20 +46,20 @@ public class MoveMaker {
 		map.put(new Candy().getKey() + new WrappedCandy().getKey(), new CandyMove(grid));
 
 		map.put(new HorizontalStripedCandy().getKey() + new Candy().getKey(), new CandyMove(grid));
-		map.put(new HorizontalStripedCandy().getKey() + new HorizontalStripedCandy().getKey(), new backend.move.TwoStripedMove(grid));
-		map.put(new HorizontalStripedCandy().getKey() + new VerticalStripedCandy().getKey(), new backend.move.TwoStripedMove(grid));
-		map.put(new HorizontalStripedCandy().getKey() + new WrappedCandy().getKey(), new backend.move.WrappedStripedMove(grid));
+		map.put(new HorizontalStripedCandy().getKey() + new HorizontalStripedCandy().getKey(), new TwoStripedMove(grid));
+		map.put(new HorizontalStripedCandy().getKey() + new VerticalStripedCandy().getKey(), new TwoStripedMove(grid));
+		map.put(new HorizontalStripedCandy().getKey() + new WrappedCandy().getKey(), new WrappedStripedMove(grid));
 
 		map.put(new VerticalStripedCandy().getKey() + new Candy().getKey(), new CandyMove(grid));
-		map.put(new VerticalStripedCandy().getKey() + new HorizontalStripedCandy().getKey(), new backend.move.TwoStripedMove(grid));
-		map.put(new VerticalStripedCandy().getKey() + new VerticalStripedCandy().getKey(), new backend.move.TwoStripedMove(grid));
-		map.put(new VerticalStripedCandy().getKey() + new WrappedCandy().getKey(), new backend.move.WrappedStripedMove(grid));
+		map.put(new VerticalStripedCandy().getKey() + new HorizontalStripedCandy().getKey(), new TwoStripedMove(grid));
+		map.put(new VerticalStripedCandy().getKey() + new VerticalStripedCandy().getKey(), new TwoStripedMove(grid));
+		map.put(new VerticalStripedCandy().getKey() + new WrappedCandy().getKey(), new WrappedStripedMove(grid));
 
 
 		map.put(new WrappedCandy().getKey() + new Candy().getKey(), new CandyMove(grid));
-		map.put(new WrappedCandy().getKey() + new HorizontalStripedCandy().getKey(), new backend.move.WrappedStripedMove(grid));
-		map.put(new WrappedCandy().getKey() + new VerticalStripedCandy().getKey(), new backend.move.WrappedStripedMove(grid));
-		map.put(new WrappedCandy().getKey() + new WrappedCandy().getKey(), new backend.move.TwoWrappedMove(grid));
+		map.put(new WrappedCandy().getKey() + new HorizontalStripedCandy().getKey(), new WrappedStripedMove(grid));
+		map.put(new WrappedCandy().getKey() + new VerticalStripedCandy().getKey(), new WrappedStripedMove(grid));
+		map.put(new WrappedCandy().getKey() + new WrappedCandy().getKey(), new TwoWrappedMove(grid));
 
 
 

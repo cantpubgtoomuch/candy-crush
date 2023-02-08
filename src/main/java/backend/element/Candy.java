@@ -2,20 +2,20 @@ package backend.element;
 
 public class Candy extends Element {
 	
-	private backend.element.CandyColor color;
+	private CandyColor color;
 	
 	public Candy() {
 	}
 	
-	public Candy(backend.element.CandyColor color) {
+	public Candy(CandyColor color) {
 		this.color = color;
 	}
 	
-	public backend.element.CandyColor getColor() {
+	public CandyColor getColor() {
 		return color;
 	}
 	
-	public void setColor(backend.element.CandyColor color) {
+	public void setColor(CandyColor color) {
 		this.color = color;
 	}
 	

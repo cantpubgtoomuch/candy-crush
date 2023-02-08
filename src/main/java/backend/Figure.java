@@ -1,11 +1,9 @@
 package backend;
 
-import backend.element.Candy;
-import backend.element.CandyColor;
-import backend.element.Element;
-import backend.element.HorizontalStripedCandy;
-import backend.element.VerticalStripedCandy;
-import backend.element.WrappedCandy;
+
+
+
+import backend.element.*;
 
 import java.awt.Point;
 

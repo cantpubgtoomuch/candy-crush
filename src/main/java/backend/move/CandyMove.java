@@ -1,10 +1,11 @@
 package backend.move;
 
+
 import backend.Figure;
 import backend.FigureDetector;
 import backend.Grid;
 
-public class CandyMove extends backend.move.Move {
+public class CandyMove extends Move {
 
 	private Figure f1;
 	private Figure f2;

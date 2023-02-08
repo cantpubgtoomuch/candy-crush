@@ -1,8 +1,8 @@
 package backend.level;
 
 import backend.Grid;
-import backend.cell.Cell;
 import backend.element.Wall;
+import backend.cell.Cell;
 
 public abstract class Level extends Grid {
 

@@ -1,6 +1,5 @@
 package backend.element;
 
-import backend.element.Candy;
 import backend.move.Direction;
 
 public class WrappedCandy extends Candy {
