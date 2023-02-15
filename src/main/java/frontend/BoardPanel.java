@@ -24,32 +24,10 @@ public class BoardPanel extends TilePane {
 			}
 		}
 	}
-	
+	public ImageView[][] getCells() {
+		return cells;
+	}
 	public void setImage(int row, int column, Image image) {
 		cells[row][column].setImage(image);
 	}
-
-	private void setGoldCell(int row, int column) {
-
-		Light.Distant spotLight = new Light.Distant();
-		spotLight.setColor(Color.YELLOW);
-		spotLight.setElevation(100);
-		Lighting lighting = new Lighting(spotLight);
-
-		cells[row][column].setEffect(lighting);
-
-	}
-
-	public void setGoldColumn(int column){
-		for (int i = 0 ; i < cells.length ; i++){
-			setGoldCell(i, column);
-		}
-	}
-
-	public void setGoldRow(int row){
-		for(int i = 0; i < cells[row].length; i++){
-			setGoldCell(row, i);
-		}
-	}
-
 }
