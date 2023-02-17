@@ -6,16 +6,35 @@ import javafx.scene.control.*;
 import java.util.Optional;
 
 public class AppMenu extends MenuBar {
-
-    public AppMenu(frontend.GameApp app) {
-        Menu file = new Menu("Archivo");
-        MenuItem exitMenuItem = new MenuItem("Salir");
-        MenuItem backMenuItem = new MenuItem("Menu");
+    private Menu file;
+    private MenuItem exitMenuItem;
+    private MenuItem backMenuItem;
+    private Menu help;
+    private MenuItem aboutMenuItem;
+    private GameApp app;
+    public AppMenu(GameApp app) {
+        this.app = app;
+        file = new Menu("Option");
+        help = new Menu("Help");
+        exitMenuItem = new MenuItem("Exit");
+        backMenuItem = new MenuItem("Menu");
+        aboutMenuItem = new MenuItem("About");
+        file.getItems().addAll( backMenuItem, exitMenuItem);
+        help.getItems().add(aboutMenuItem);
+        getMenus().addAll(file, help);
+        exit();
+        backToMenu();
+        help();
+    }
+    public Menu getMenu() {
+        return file;
+    }
+    public void exit() {
         exitMenuItem.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Salir");
-            alert.setHeaderText("Salir de la aplicación");
-            alert.setContentText("¿Está seguro que desea salir de la aplicación?");
+            String title = "Exit";
+            String headerText = "Exit the application";
+            String contentText = "Are you sure you want to exit the application?";
+            Alert alert = createAlert(title, headerText, contentText);
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()) {
                 if (result.get() == ButtonType.OK) {
@@ -23,11 +42,14 @@ public class AppMenu extends MenuBar {
                 }
             }
         });
+    }
+
+    public void backToMenu() {
         backMenuItem.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Salir");
-            alert.setHeaderText("Volver al menu");
-            alert.setContentText("¿Está seguro que desea volver al Menu?");
+            String title = "Menu";
+            String headerText = "Back to menu";
+            String contentText = "Are you sure you want to return to the menu?";
+            Alert alert = createAlert(title, headerText, contentText);
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent()) {
                 if (result.get() == ButtonType.OK) {
@@ -35,21 +57,23 @@ public class AppMenu extends MenuBar {
                 }
             }
         });
-
-        file.getItems().addAll( backMenuItem, exitMenuItem);
-
-        Menu help = new Menu("Ayuda");
-        MenuItem aboutMenuItem = new MenuItem("Acerca De");
-        aboutMenuItem.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Acerca De");
-            alert.setHeaderText("Candy TPE");
-            alert.setContentText("Cátedra POO 2018.\n" +
-                    "Implementación Original: Laura Zabaleta (POO 2013).");
-            alert.showAndWait();
-        });
-        help.getItems().add(aboutMenuItem);
-        getMenus().addAll(file, help);
     }
 
+    public void help() {
+        aboutMenuItem.setOnAction(event -> {
+            String title = "About";
+            String headerText = "Candy Crush Version 1.0";
+            String contentText = "";
+            Alert alert = createAlert(title, headerText, contentText);
+            alert.showAndWait();
+        });
+    }
+
+    private Alert createAlert(String title, String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        return alert;
+    }
 }

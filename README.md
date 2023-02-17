@@ -1,6 +1,6 @@
 # Candy Crush
 
-The aim of this work is to implement new functionalities in a very reduced version of the game **_Candy Crush_** developed in Java.
+The aim of this work is to create a very reduced version of the game **_Candy Crush_** and thoroughly test all functionalities using Java.
 
 ## Functional description
 
@@ -15,27 +15,5 @@ When certain figures explode they leave special candies in their place, which wh
 ## Levels
 
 ### Level 1: Classic   
-The objective of this level is to reach the desired score before a certain number of moves.
+The objective is to reach the desired score before a certain number of moves.
 
-![Level1](https://media.giphy.com/media/UohbAYIuTuiztcbKpK/giphy.gif)
-
-### Level 2: GoldenBoard
-The goal of this level is for the entire board to turn to gold.
-
-![Level2](https://media.giphy.com/media/VFgd2b8XDXeHDzqNar/giphy.gif)
- 
-For this it is necessary to make exchanges:
-- Valid horizontal exchanges transform the row in question to gold.
-- Valid vertical exchanges transform the column in question to gold.
-
-If a row or column is already gold and valid trades are made on it, it does nothing. The number of squares on the board remaining to turn gold is displayed on the bottom panel, along with the score and remaining moves.
-
-### Level 5: Fruit (Cherry & Hazelnut)
-
-The objective of the level is to bring a certain amount of fruit to the last row of the board in less than a certain amount of moves.
-
-![Level5](https://media.giphy.com/media/c5e2L8WZyDTrwJKfld/giphy.gif)
-
-These fruits cannot generate combos, no special candy deletes them and they only disappear when they reach the last row of the board.
-
-The number of remaining fruits and the number of remaining moves are displayed in the lower panel, along with the score.

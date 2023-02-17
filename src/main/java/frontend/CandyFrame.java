@@ -28,21 +28,18 @@ public class CandyFrame extends VBox {
 	private ImageManager images;
 	private Point2D lastPoint;
 	private final CandyGame game;
-	private final LevelBehaviour levelBehaviour;
 	private final GameApp app;
 
 	public CandyFrame(CandyGame game, Level level, GameApp app){
-		this(game, level, app, (board, first, second) -> {});
-	}
-
-	public CandyFrame(CandyGame game, Level level, GameApp app, LevelBehaviour behaviour){
 		this.game = game;
-		this.levelBehaviour = behaviour;
 		this.app = app;
-		CandyLevel(level);
+		playLevel(level);
 	}
 
-	public void CandyLevel(Level level) {
+	public Point2D getLastPoint() {
+		return lastPoint;
+	}
+	public void playLevel(Level level) {
 
 		getChildren().add(new AppMenu(app));
 		images = new ImageManager();
@@ -79,28 +76,27 @@ public class CandyFrame extends VBox {
 		});
 
 		listener.gridUpdated();
+		moveCandy();
+	}
 
+	private void moveCandy() {
 		addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			Point2D newPoint = translateCoords(event.getX(), event.getY());
 			if (lastPoint == null) {
-				lastPoint = translateCoords(event.getX(), event.getY());
+				lastPoint = newPoint;
 				System.out.println("Get first = " +  lastPoint);
 			} else {
-				Point2D newPoint = translateCoords(event.getX(), event.getY());
 				if (newPoint != null) {
 					System.out.println("Get second = " +  newPoint);
-					boolean valid = game().tryMove((int)lastPoint.getX(), (int)lastPoint.getY(), (int)newPoint.getX(), (int)newPoint.getY());
-
-					if ( valid ) {
-						levelBehaviour.update(boardPanel, lastPoint, newPoint);
-					}
+					game().tryMove((int)lastPoint.getX(), (int)lastPoint.getY(), (int)newPoint.getX(), (int)newPoint.getY());
 
 					String message = game().getDescription();
 
 					if (game().isFinished()) {
 						if (game().playerWon()) {
-							finishedGame("¡Felicidades!", "Finished - Player Won!");
+							finishedGame("Finished - Player Won!", "Finished - Player Won!");
 						} else {
-							finishedGame("Has perdido", "Finished - Loser!");
+							finishedGame("Finished - Loser!", "Finished - Loser!");
 						}
 					}
 					scorePanel.updateScore(message);
@@ -108,9 +104,7 @@ public class CandyFrame extends VBox {
 				}
 			}
 		});
-
 	}
-
 	private CandyGame game() {
 		return game;
 	}
@@ -121,12 +115,12 @@ public class CandyFrame extends VBox {
 		return (i >= 0 && i < game.getSize() && j >= 0 && j < game.getSize()) ? new Point2D(j, i) : null;
 	}
 
-	public void finishedGame(String text, String message){
+	private void finishedGame(String text, String message){
 		scorePanel.updateScore(message);
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setTitle("Juego terminado");
+		alert.setTitle("Game Over");
 		alert.setHeaderText(text);
-		alert.setContentText("¿Desea volver al menu?");
+		alert.setContentText("Do you want to go back to the menu?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if(result.isPresent()) {
 			if (result.get() == ButtonType.OK) {
@@ -136,5 +130,5 @@ public class CandyFrame extends VBox {
 			}
 		}
 	}
-
 }
+
